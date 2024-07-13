@@ -9,6 +9,7 @@ const {errorResponse,successResponse}=require('../utils/common');
  * req-body {modelNumber: 'airbus320', capacity: 200}
  */
 async function createFlight(req, res) {
+    
     try {
         const Flight = await FlightService.createFlight({
             flightNumber: req.body.flightNumber,

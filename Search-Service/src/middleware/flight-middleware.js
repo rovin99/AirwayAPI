@@ -3,6 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const {errorResponse}=require('../utils/common');
 function validateCreateFlight(req, res, next) {
+
     if(!req.body.flightNumber){
         errorResponse.message='Something went wrong while creating a new Flight'
         errorResponse.error={
@@ -84,6 +85,7 @@ function validateCreateFlight(req, res, next) {
                 .status(StatusCodes.BAD_REQUEST)
                 .json(errorResponse);
     }
+    next();
     
 }
 function validateUpdateSeats(req, res) {

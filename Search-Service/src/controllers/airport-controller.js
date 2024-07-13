@@ -15,7 +15,7 @@ async function createAirport(req, res) {
             address: req.body.address,
             city_id: req.body.city_id
         });
-        successResponse.message = 'Airport created successfully';
+       
         successResponse.data=Airport;
         return res
                 .status(StatusCodes.CREATED)

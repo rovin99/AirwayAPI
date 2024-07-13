@@ -8,7 +8,7 @@ const {Op} = require("sequelize");
 const flightRepository = new FlightRepository();
 
 async function createFlight(data) {
-    console.log('Received data:', data); 
+    
     try {
         if(!compareDate(data.arrival, data.departure)) {
           throw new AppError('Invalid date/time range...', 400); 
@@ -23,7 +23,7 @@ async function createFlight(data) {
         return Flight;
         
     } catch(error) {
-        
+        console.error('Full error object:', error);
         if(error.name =='SequelizeValidationError') {
             let explaination=[];
             

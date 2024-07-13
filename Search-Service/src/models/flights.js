@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },    
-    airplane: {
+    airplaneId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

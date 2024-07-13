@@ -13,7 +13,7 @@ async function createAirplane(req, res) {
             modelNumber: req.body.modelNumber,
             capacity: req.body.capacity
         });
-        successResponse.message = 'Airplane created successfully';
+        
         successResponse.data=airplane;
         return res
                 .status(StatusCodes.CREATED)
