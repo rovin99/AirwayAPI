@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 
 const { AirportService } = require('../services');
-const { response } = require('express');
+const { Logger } = require("../config")
 const {errorResponse,successResponse}=require('../utils/common');
 /**
  * POST : /Airports 
@@ -24,6 +24,7 @@ async function createAirport(req, res) {
     } catch(error) {
         
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -39,6 +40,7 @@ async function getAirports(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -56,6 +58,7 @@ async function getAirport(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -72,6 +75,7 @@ async function destroyAirport(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -90,6 +94,7 @@ async function updateAirport(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);

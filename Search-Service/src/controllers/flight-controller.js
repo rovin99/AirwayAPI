@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 
 const { FlightService } = require('../services');
-const { response } = require('express');
+const { Logger } = require("../config");
 const {errorResponse,successResponse}=require('../utils/common');
 
 /**
@@ -30,6 +30,7 @@ async function createFlight(req, res) {
     } catch(error) {
         
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -45,6 +46,8 @@ async function getFlights(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
+        
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -63,6 +66,7 @@ async function getFlight(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -79,6 +83,7 @@ async function destroyFlight(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -101,6 +106,7 @@ async function updateSeats(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);

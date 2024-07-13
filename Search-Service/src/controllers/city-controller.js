@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 
 const { CityService } = require('../services');
-const { response } = require('express');
+const { Logger } = require("../config");
 const {errorResponse,successResponse}=require('../utils/common');
 /**
  * POST : /city 
@@ -22,6 +22,7 @@ async function createCity(req, res) {
     } catch(error) {
         
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -43,6 +44,7 @@ async function destroyCity(req, res) {
     } catch(error) {
         
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -64,6 +66,7 @@ async function updateCity(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);

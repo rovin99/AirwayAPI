@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 
 const { AirplaneService } = require('../services');
-const { response } = require('express');
+const { Logger } = require("../config");
 const {errorResponse,successResponse}=require('../utils/common');
 /**
  * POST : /airplanes 
@@ -22,6 +22,7 @@ async function createAirplane(req, res) {
     } catch(error) {
         
         errorResponse.error=error;
+        Logger.error(error);    
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -37,6 +38,7 @@ async function getAirplanes(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -54,6 +56,7 @@ async function getAirplane(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -70,6 +73,7 @@ async function destroyAirplane(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
@@ -88,6 +92,7 @@ async function updateAirplane(req, res) {
                 
     } catch(error) {
         errorResponse.error=error;
+        Logger.error(error);
         return res
             .status(error.statusCode)
             .json(errorResponse);
