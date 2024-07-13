@@ -9,12 +9,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      flightNumber: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
-      from:{
+      departureAirportId:{
         type: Sequelize.STRING,
         allowNull: false,
         references:{
@@ -23,7 +23,7 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
-      to:{
+      arrivalAirportId:{
         type: Sequelize.STRING,
         allowNull: false,
         references:{
@@ -44,9 +44,14 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },    
-      airplane: {
+      airplaneId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "airplanes",
+          key: "id",
+        },
+        onDelete: "CASCADE",
         
       },
       boardingGate:{

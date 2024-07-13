@@ -11,13 +11,13 @@ const {errorResponse,successResponse}=require('../utils/common');
 async function createFlight(req, res) {
     try {
         const Flight = await FlightService.createFlight({
-            name: req.body.name,
-            from: req.body.from,
-            to: req.body.to,
+            flightNumber: req.body.flightNumber,
+            departureAirportId: req.body.departureAirportId,
+            arrivalAirportId: req.body.arrivalAirportId,
             price: req.body.price,
             arrival: req.body.arrival,
             departure: req.body.departure,
-            airplane: req.body.airplane,
+            airplaneId: req.body.airplaneId,
             boardingGate: req.body.boardingGate,
             totalSeats: req.body.totalSeats,
         });

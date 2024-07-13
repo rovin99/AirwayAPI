@@ -1,6 +1,6 @@
 function arrDepartCheck(object) {
 
-    return object.from===object.to;
+    return object.departureAirportId===object.arrivalAirportId;
 
 }
 

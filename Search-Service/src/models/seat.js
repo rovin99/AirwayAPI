@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.Airplane, {
+        foreignKey: "airplaneId",
+        onDelete: "CASCADE",
+      });
     }
   }
   seat.init({
@@ -37,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   , {
     sequelize,
-    modelName: 'seat',
+    modelName: 'Seat',
   });
   return seat;
 };

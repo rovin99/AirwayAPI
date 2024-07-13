@@ -3,28 +3,28 @@ const { StatusCodes } = require('http-status-codes');
 
 const {errorResponse}=require('../utils/common');
 function validateCreateFlight(req, res, next) {
-    if(!req.body.name){
+    if(!req.body.flightNumber){
         errorResponse.message='Something went wrong while creating a new Flight'
         errorResponse.error={
-            explanation: 'name not found in the request in correct format'
+            explanation: 'flightNumber not found in the request in correct format'
         };
         return res
                 .status(StatusCodes.BAD_REQUEST)
                 .json(errorResponse);
     }
-    if(!req.body.from){
+    if(!req.body.departureAirportId){
         errorResponse.message='Something went wrong while creating a new Flight'
         errorResponse.error={
-            explanation: 'from not found in the request in correct format'
+            explanation: 'departureAirportId not found in the request in correct format'
         };
         return res
                 .status(StatusCodes.BAD_REQUEST)
                 .json(errorResponse);
     }
-    if(!req.body.to) {
+    if(!req.body.arrivalAirportId) {
         errorResponse.message='Something went wrong while creating a new Flight'
         errorResponse.error={
-            explanation: 'to not found in the request in correct format'
+            explanation: 'arrivalAirportId not found in the request in correct format'
         };
         return res
                 .status(StatusCodes.BAD_REQUEST)
@@ -57,10 +57,10 @@ function validateCreateFlight(req, res, next) {
                 .status(StatusCodes.BAD_REQUEST)
                 .json(errorResponse);
     }
-    if(!req.body.airplane){
+    if(!req.body.airplaneId){
         errorResponse.message='Something went wrong while creating a new Flight'
         errorResponse.error={
-            explanation: 'airplane not found in the request in correct format'
+            explanation: 'airplaneId not found in the request in correct format'
         };
         return res
                 .status(StatusCodes.BAD_REQUEST)
