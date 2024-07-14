@@ -100,7 +100,7 @@ async function cancelOldBookings(timestamp){
     try {
         console.log("Inside service");
         const time = new Date( Date.now() - 1000 * 300 ); // time 5 mins ago
-        const response = await bookingRepository.cancelOldBookings(time);
+        const response = await bookingRepository.cancelOldBooking(time);
         
         return response;
     } catch(error) {

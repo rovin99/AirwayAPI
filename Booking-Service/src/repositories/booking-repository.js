@@ -1,6 +1,10 @@
 const CrudRepository = require('./crud-repository');
 const { Booking } = require('../models');
 const { StatusCodes } = require('http-status-codes');
+const commonUtils = require('../utils/common');
+const { Op } = require("sequelize");
+const { Enums } = commonUtils;
+const { BOOKED, PENDING, INITIATED, CANCELLED } = Enums.BOOKING_STATUS;
 class BookingRepository extends CrudRepository {
 
     constructor(){
@@ -54,6 +58,20 @@ class BookingRepository extends CrudRepository {
         });
         return response;
     }
+    async getAllBookings(userId) {
+        const response = await this.model.findAll({
+          where: {
+            userId: userId,
+          },
+        });
+        if (!response) {
+          throw new AppError(
+            "Not able to find the bookings ",
+            StatusCodes.NOT_FOUND
+          );
+        }
+        return response;
+      }
 };
 
 module.exports = BookingRepository;
