@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended:true }));
 
 app.use('/api',apiRoutes);
 app.listen(ServerConfig.PORT,()=>{
-    CRON();
+    
     console.log(`listening on port: ${ServerConfig.PORT}`);
     Logger.info('successfully started',"root",{msg:"something started"});
 })
