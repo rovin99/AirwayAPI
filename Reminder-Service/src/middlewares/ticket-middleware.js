@@ -4,10 +4,10 @@ const { ErrorResponse } = require("../utils/common");
 const AppError = require("../utils/errors/app-error");
 
 function validateCreateRequest(req, res, next) {
-  if (!req.body.recipientEmail) {
+  if (!req.body.recepientEmail) {
     ErrorResponse.message = "Failed to send email";
     ErrorResponse.error = new AppError(
-      ["The recipientEmail was not found in the incoming request"],
+      ["The recepientEmail was not found in the incoming request"],
       StatusCodes.BAD_REQUEST
     );
     return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);

@@ -12,22 +12,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      bookingId: {
-        type: Sequelize.INTEGER,
-      },
-      recipientEmail: {
+      subject: {
         type: Sequelize.STRING,
-      },
-      departureTime: {
-        type: Sequelize.DATE,
         allowNull: false,
       },
-      arrivalTime: {
-        type: Sequelize.DATE,
+      content: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      noOfSeats: {
-        type: Sequelize.INTEGER,
+      recepientEmail: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       status: {

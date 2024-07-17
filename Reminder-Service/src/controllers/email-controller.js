@@ -4,9 +4,10 @@ const { emailService } = require("../services");
 const { SuccessResponse, ErrorResponse } = require("../utils/common");
 
 async function create(req, res) {
+  console.log(req.body);
   try {
     const response = await emailService.createTicket({
-      recipientEmail: req.body.recipientEmail,
+      recepientEmail: req.body.recepientEmail,
       subject: req.body.subject,
       content: req.body.content,
     });
@@ -19,19 +20,6 @@ async function create(req, res) {
   }
 }
 
-async function sendEmail(req, res) {
-  try {
-    const response = await emailService.sendEmail({
-      recipientEmail: req.body.recipientEmail,
-      subject: req.body.subject,
-      content: req.body.content,
-    });
-    SuccessResponse.data = response;
-    res.status(StatusCodes.CREATED).json(SuccessResponse);
-  } catch (error) {
-    ErrorResponse.error = error;
-    return res.status(StatusCodes.SERVICE_UNAVAILABLE).json(ErrorResponse);
-  }
-}
 
-module.exports = { create, sendEmail };
+
+module.exports = { create };

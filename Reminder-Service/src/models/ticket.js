@@ -16,25 +16,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ticket.init({
-    bookingId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    recipientEmail: {
+    subject: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
-    departureTime: {
-      type: DataTypes.DATE,
-      allowNull: false,
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    arrivalTime: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    noOfSeats: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+    recepientEmail: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     status: {
       type: DataTypes.ENUM,
@@ -44,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'ticket',
+    modelName: 'Ticket',
   });
   return ticket;
 };
