@@ -8,10 +8,20 @@ async function connectQueue() {
     console.log("connected to queue");
     channel = await connection.createChannel();
     await channel.assertQueue("NOTIFICATION_QUEUE");
-    channel.sendToQueue("NOTIFICATION_QUEUE", Buffer.from('one more'));
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+async function sendData(data) {
+  try {
+    await channel.sendToQueue(
+      "NOTIFICATION_QUEUE",
+      Buffer.from(JSON.stringify(data))
+    );
   } catch (error) {
     console.log(error);
   }
 }
 
-module.exports = { connectQueue};
+module.exports = { connectQueue,sendData};
