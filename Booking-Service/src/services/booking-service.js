@@ -14,7 +14,7 @@ const bookingRepository = new BookingRepository();
 async function createBooking(data){
 
     const transaction = await db.sequelize.transaction();
-    transaction.ISOLATION_LEVELS.SERIALIZABLE; // To handle two concurrent booking for only one seat that is left
+    
     try{
         const flight = await axios.get(`${ServerConfig.FLIGHT_SERVICE}/api/v1/flights/${data.flightId}`);
         const flightData = flight.data.data;
@@ -76,10 +76,10 @@ async function makePayment(data){
         const flightData = flight.data.data;
 
         Queue.sendData({
-            recipientEmail: "rs206987@gmail.com",
-            subject: 'Booking Confirmation',
-            content: `Booking confirmed for flight ${flightData.flightNumber} from ${flightData.arrivalAirportId} to ${flightData.departureAirportId} `,
-            status: "BOOKED"
+
+            recepientEmail: 'rs206987@gmail.com',
+            subject: 'Flight booked',
+            text: `Booking confirmed for flight ${flightData.flightNumber} from ${flightData.arrivalAirportId} to ${flightData.departureAirportId}`
         })
         await transaction.commit();
         return response;

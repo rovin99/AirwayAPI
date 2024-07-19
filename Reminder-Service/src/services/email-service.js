@@ -1,5 +1,5 @@
 const { TicketRepository } = require("../repositories");
-const { mailsender } = require("../config");
+const { Mailer } = require("../config");
 const ticketRepo = new TicketRepository();
 const { StatusCodes } = require("http-status-codes");
 const AppError = require("../utils/errors/app-error");
@@ -18,22 +18,19 @@ async function createTicket(data) {
 }
 
 
-async function sendEmail(mailFrom, mailTo, subject, text, html) {
+async function sendEmail(mailFrom, mailTo, subject, text) {
   try {
-    const response = await mailsender.sendMail({
-      from: {
-        name: "Airway",
-        address: mailFrom,
-      },
-      to: mailTo,
-      subject: subject,
-      text: text,
-      html: html,
-    });
-    return response;
-  } catch (error) {
-    console.log(error);
-    throw new AppError("Not able to send email", StatusCodes.INTERNAL_SERVER);
+
+      const response = await Mailer.sendMail({
+          from: mailFrom,
+          to: mailTo,
+          subject: subject,
+          text: text
+      });
+      return response;
+  } catch(error) {
+      console.log(error);
+      throw error;
   }
 }
 module.exports = {
