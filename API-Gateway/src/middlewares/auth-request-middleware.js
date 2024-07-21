@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const { ErrorResponse } = require("../utils/common");
 
-
+const { UserService } = require("../services");
 function validateAuthRequest(req, res, next) {
   console.log(req.body.email);
   if (!req.body.email) {

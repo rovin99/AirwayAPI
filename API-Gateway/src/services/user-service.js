@@ -6,6 +6,7 @@ const AppError=require('../utils/errors/app-error');
 const {
   checkPassword,
   createToken,
+    verifyToken,
  
 } = require("../utils/common/auth");
 
@@ -54,7 +55,31 @@ async function signin(data) {
       );
     }
   }
+  async function isAuthenticated(token) {
+    try {
+      if (!token) {
+        throw new AppError("Token is required!", StatusCodes.BAD_REQUEST);
+      }
+  
+      const response = verifyToken(token);
+      console.log("verifyToken response", response);
+      const user = await userRepository.get(response.id);
+      if (!user) {
+        throw new AppError("User not found!", StatusCodes.NOT_FOUND);
+      }
+      return user;
+    } catch (error) {
+      if (error instanceof AppError) throw error;
+      if (error.name == "JsonWebTokenError") {
+        throw new AppError("Invalid token!", StatusCodes.BAD_REQUEST);
+      }
+      if (error.name == "TokenExpiredError") {
+        throw new AppError("Token expired!", StatusCodes.BAD_REQUEST);
+      }
+    }
+  }
 module.exports={
     create,
-    signin
+    signin,
+    isAuthenticated
 }
