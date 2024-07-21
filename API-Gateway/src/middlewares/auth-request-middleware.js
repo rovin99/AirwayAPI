@@ -17,10 +17,28 @@ function validateAuthRequest(req, res, next) {
   next();
 }
 
+async function checkAuth(req, res, next) {
+  try {
+    const response = await UserService.isAuthenticated(
+      req.headers["x-access-token"]
+    );
+    console.log("Response from checkAtuh :", response);
+    if (response) {
+      req.user = response; // setting the user id in the req object
+      next();
+    }
+  } catch (error) {
+    console.log(error);
+    if (error.statusCode) return res.status(error.statusCode).json(error);
+    return res.status(StatusCodes.FORBIDDEN).json(error);
+  }
+}
+
 
 
 
 
 module.exports = {
   validateAuthRequest,
+  checkAuth
 };

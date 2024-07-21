@@ -6,6 +6,11 @@ class UserRepository extends CrudRepository {
     super(User);
   }
 
+  async getUserByEmail(email) {
+    const user = await this.model.findOne({ where: { email: email } });
+    return user;
+  }
+
 }
 
 module.exports = UserRepository;
