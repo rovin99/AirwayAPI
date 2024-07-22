@@ -40,7 +40,7 @@ class CrudRepository {
     const response = await this.model.findAll();
     return response;
   }
-
+  
   
 }
 
