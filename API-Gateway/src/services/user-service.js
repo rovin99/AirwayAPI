@@ -1,5 +1,6 @@
 const {StatusCodes}= require('http-status-codes');
 const {UserRepository}=require('../repositories');
+const {RoleRepository}=require('../repositories');
 const AppError=require('../utils/errors/app-error');
 
 
@@ -9,15 +10,21 @@ const {
     verifyToken,
  
 } = require("../utils/common/auth");
-
+const { ROLE } = require("../utils/common/enums");
+const { ADMIN, CUSTOMER, FLIGHT_COMPANY } = ROLE;
 const userRepository=new UserRepository();
-
+const roleRepository = new RoleRepository();
 async function create(data){
     try{
-        const response=await userRepository.create(data);
-        return response;
+        const user=await userRepository.create(data);
+        const role = await roleRepository.getRoleByName(CUSTOMER);
+      
+    user.addRole(role);
+        return user;
+        
     }catch (error) {
-        if (error.name == "SequelizeValidationError") {
+      console.error("Error creating user:", error);
+        if (error.name == "SequelizeValidationError" || "SequelizeUniqueConstraintError") {
           let explanation = [];
           error.errors.forEach((err) => {
             explanation.push(err.message);

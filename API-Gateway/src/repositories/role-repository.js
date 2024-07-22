@@ -5,7 +5,10 @@ class RoleRepository extends CrudRepository {
   constructor() {
     super(Role);
   }
-
+  async getRoleByName(name) {
+    const role = await this.model.findOne({ where: { name: name } });
+    return role;
+  }
 
 }
 
