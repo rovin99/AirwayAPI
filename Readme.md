@@ -29,6 +29,8 @@ Implements forward proxy to route requests to appropriate microservices
 Utilizes reverse proxy capabilities for enhanced security and load balancing
 Provides additional features such as rate limiting and request/response transformation
 
+
+![High Level Design](High-Level-Design.png)
 Tech Stack
 
 Node.js
