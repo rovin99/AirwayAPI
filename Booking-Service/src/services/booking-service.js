@@ -42,10 +42,11 @@ async function createBooking(data){
 }
 
 async function makePayment(data){
-
+    console.log("Received in Service")
     const transaction = await db.sequelize.transaction();
     try{
         const bookingDetails = await bookingRepository.get(data.bookingId, transaction);
+        console.log("Booking details:", JSON.stringify(bookingDetails));
         if(bookingDetails.status === CANCELLED){
             throw new AppError('Booking Expired-Request Timeout', StatusCodes.BAD_REQUEST);
         }
@@ -64,9 +65,7 @@ async function makePayment(data){
         if(bookingDetails.userId != data.userId) {
             throw new AppError('The user corresponding to the booking doesnt match', StatusCodes.BAD_REQUEST);
         }
-        //assuming the payment is sucessful
-
-
+       
         const response=await bookingRepository.update(data.bookingId, {status: BOOKED}, transaction);
         console.log("response inside booking/payment service", response);
 
@@ -85,6 +84,7 @@ async function makePayment(data){
         return response;
     }
     catch(err){
+        
         await transaction.rollback();
         console.error(err);
         throw err;
@@ -130,5 +130,6 @@ async function cancelOldBookings(timestamp){
 module.exports ={
     createBooking,
     makePayment,
-    cancelOldBookings
+    cancelOldBookings,
+    cancelBooking
 }
